@@ -1,8 +1,8 @@
 # rocket-server
 
-Getting Started
+###Getting Started###
 
-YOU MUST INSTALL MONGODB.
+####YOU MUST INSTALL MONGODB.####
 
 Checkout this repo, install dependencies, then start the gulp process with the following:
 
