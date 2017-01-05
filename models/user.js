@@ -5,7 +5,25 @@ const bcrypt = require('bcrypt-nodejs');
 
 const userSchema = new Schema({
   email: { type: String, unique: true, lowercase: true },
-  password: String
+  password: String,
+  received: [
+    {
+      from: String,
+      subject: String,
+      to: String,
+      timestamp: Date,
+      content_id: { type: Schema.ObjectId }
+    }
+  ],
+  sent: [
+    {
+      from: String,
+      subject: String,
+      to: String,
+      timestamp: Date,
+      content_id: { type: Schema.ObjectId }
+    }
+  ]
 });
 
 userSchema.pre('save', function(next) {

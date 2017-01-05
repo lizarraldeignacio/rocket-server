@@ -1,3 +1,6 @@
 module.exports = {
-  secret: 'fasdfasgsdffsadfasdf'
+  secret: 'fasdfasgsdffsadfasdf',
+  emailAccount: 'abc@abc.com',
+  emailPassword: 'abc123',
+  smtpServer: 'email.smpt.com'
 };
