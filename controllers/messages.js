@@ -4,8 +4,22 @@ const Email = require('../services/email');
 
 module.exports.getMessagesHeaders = function(req, res) {
   const token = req.header.authorization;
+
+  var messages = null;
+
+  switch (req.query.type) {
+    case 'sent':
+      messages = req.user.sent
+      break;
+    case 'received':
+      messages = req.user.received
+      break;
+  }
+
   return res.status(200)
-    .send({ messages: req.user.messages });
+    .send({
+      messages: messages
+    });
 }
 
 module.exports.sendMessage = function(req, res, next) {
@@ -23,6 +37,8 @@ module.exports.sendMessage = function(req, res, next) {
     content: content
   });
 
+  console.log(req.user);
+
   message.save(function(err, message) {
     if (err) { return next(err); }
 
@@ -34,9 +50,14 @@ module.exports.sendMessage = function(req, res, next) {
       content_id: message._id
     };
 
-    req.user.sent.push(messageHeader);
+    const user = req.user;
 
-    req.user.save(function(err) {
+    user.sent.push(messageHeader);
+
+    console.log(user);
+
+    user.update({$push: {"sent": messageHeader}},
+    {safe: true, upsert: true}, function(err) {
       if (err) { return next(err); }
       /*const mailOptions = {
           from: from, // sender address
