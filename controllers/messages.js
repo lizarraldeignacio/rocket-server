@@ -37,8 +37,6 @@ module.exports.sendMessage = function(req, res, next) {
     content: content
   });
 
-  console.log(req.user);
-
   message.save(function(err, message) {
     if (err) { return next(err); }
 
@@ -51,10 +49,6 @@ module.exports.sendMessage = function(req, res, next) {
     };
 
     const user = req.user;
-
-    user.sent.push(messageHeader);
-
-    console.log(user);
 
     user.update({$push: {"sent": messageHeader}},
     {safe: true, upsert: true}, function(err) {
