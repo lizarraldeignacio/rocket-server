@@ -1,8 +1,10 @@
 # rocket-server
 
-###Getting Started###
+NodeJS, Express, Passport, MongoDB
 
-####YOU MUST INSTALL MONGODB.####
+### Getting Started
+
+#### YOU MUST INSTALL MONGODB
 
 Checkout this repo, install dependencies, then start the gulp process with the following:
 
